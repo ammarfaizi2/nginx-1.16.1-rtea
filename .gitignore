@@ -1,0 +1,9 @@
+*.a
+*.o
+*.lo
+*.so
+*.swp
+*.tmp
+*.lock
+/pcre-8.43/
+/zlib-1.2.11/
