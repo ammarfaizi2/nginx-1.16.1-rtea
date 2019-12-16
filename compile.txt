@@ -5,6 +5,8 @@ cd pcre-8.43 && ./configure
 ln -svf $(pwd)/src $(pwd)/pcre-8.43 $(pwd)/zlib-1.2.11 build 
 sudo apt-get install libxml2-dev libxslt-dev libgeoip-dev -y
 
+sudo mkdir -vp /etc/nginx/tmp/
+
 ./configure \
 	--builddir=build \
 	--prefix=/etc/nginx \
@@ -38,10 +40,9 @@ sudo apt-get install libxml2-dev libxslt-dev libgeoip-dev -y
 	--with-http_degradation_module \
 	--with-http_slice_module \
 	--with-http_stub_status_module \
-	--with-http_perl_module=dynamic \
-	--http-client-body-temp-path=/tmp/nginx/client_body_temp \
-	--http-proxy-temp-path=/tmp/nginx/proxy_temp \
-	--http-fastcgi-temp-path=/tmp/nginx/fastcgi_temp \
+	--http-client-body-temp-path=/etc/nginx/tmp/client_body_temp \
+	--http-fastcgi-temp-path=/etc/nginx/tmp/fastcgi_temp \
+	--http-proxy-temp-path=/etc/nginx/tmp/proxy_temp \
 	--with-stream=dynamic \
 	--with-stream_ssl_module \
 	--with-stream_realip_module \
@@ -50,5 +51,5 @@ sudo apt-get install libxml2-dev libxslt-dev libgeoip-dev -y
 	--with-pcre=$(pwd)/pcre-8.43 \
 	--with-zlib=$(pwd)/zlib-1.2.11 \
 	--with-pcre-jit \
-	--with-cc-opt='-g -O3 -fPIE -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2' \
-	--with-ld-opt='-Wl,-Bsymbolic-functions -fPIE -pie -Wl,-z,relro -Wl,-z,now'
+	--with-cc-opt='-g -O3 -fPIC -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2' \
+	--with-ld-opt='-Wl,-Bsymbolic-functions -fPIC -pie -Wl,-z,relro -Wl,-z,now'
