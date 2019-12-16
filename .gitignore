@@ -5,5 +5,7 @@
 *.swp
 *.tmp
 *.lock
+/build
+/Makefile
 /pcre-8.43/
 /zlib-1.2.11/
